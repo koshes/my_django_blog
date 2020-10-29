@@ -2,8 +2,9 @@ from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from blog.models import Post
-from blog.forms import EmailPostForm
+from blog.models import Comment, Post
+from blog.forms import CommentForm, EmailPostForm
+
 from my_django_blog.settings import EMAIL_HOST_USER
 
 
@@ -30,7 +31,26 @@ def post_detail(request, year, month, day, post):
                              publish__year=year,
                              publish__month=month,
                              publish__day=day)
-    return render(request, 'blog/post/detail.html', {'post': post})
+    # Список активных комментариев к этому посту
+    comments = post.comments.filter(active=True)
+
+    new_comment = None
+
+    if request.method == 'POST':
+        # Комментарий опубликован
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            # Создать объект, но пока не сохранять в базу данных
+            new_comment = comment_form.save(commit=False)
+            # Назначить текущий пост комментарию
+            new_comment.post = post
+            # Сохранить комментарий в базе данных
+            new_comment.save()
+        else:
+            comment_form = CommentForm()
+        return render(request, 'blog/post/detail.html', {'post': post,
+                                                         'comments': comments,
+                                                         'new_comment': new_comment})
 
 
 def post_share(request, post_id):
