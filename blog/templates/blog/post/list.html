@@ -10,10 +10,10 @@
                 {{ post.title }}
             </a>
         </h2>
+        {{ post.body|truncatewords:30|linebreaks }}
         <p class="date">
             Опубликован {{ post.publish }}. Автор:  {{ post.author }}
         </p>
-        {{ post.body|truncatewords:30|linebreaks }}
     {% endfor %}
     {% include "pagination.html" with page=posts %}
 {% endblock %}
