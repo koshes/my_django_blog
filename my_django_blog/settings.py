@@ -17,6 +17,9 @@ def get_secret(setting):
         raise ImproperlyConfigured(error_msg)
 
 
+# идентификатор сайта для sitemap
+SITE_ID = 1
+
 SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'taggit',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+
 ]
 
 MIDDLEWARE = [
