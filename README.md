@@ -4,7 +4,7 @@
 * Возможность пользователям делиться понравившимися постами с помощью email рассылки 
 * Добавление тэгов к постам
 * Рекомендация похожих постов по тэгу 
-### В разработке применяется:
+### В разработке применяются:
 * [Python 3.7](https://www.python.org/downloads/release/python-379/)
 * [Django 3](https://www.djangoproject.com/)
 * [Docker](https://www.docker.com/)
