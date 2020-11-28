@@ -35,9 +35,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts.apps.AccountsConfig'
+
+    'account.apps.AccountConfig',
     'blog.apps.BlogConfig',
     'taggit',
+
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.postgres',
@@ -124,3 +126,8 @@ EMAIL_HOST_USER = get_secret('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = get_secret('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = get_secret('EMAIL_PORT')
 EMAIL_USE_TLS = True
+
+
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
